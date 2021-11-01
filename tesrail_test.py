@@ -1,10 +1,19 @@
 from testrail.testrail import *
 from pprint import pprint
+from file_manager import create_json
+from testrail.methods_testrail import GetMethod
 
 
-def get_case_request(client_url, client_user, client_password, case_id):
-    client = APIClient(client_url)
-    client.user = client_user
-    client.password = client_password
-    case = client.send_get(f'get_case/{case_id}')
+def auth_client(url, user, password):
+    client = APIClient(url)
+    client.user = user
+    client.password = password
+    return client
+
+
+def get_request(client, method: GetMethod, case_id='') -> int:
+    case = client.send_get(f'{method}/{case_id}')
+    print(type(case))
     pprint(case)
+    create_json("case_1", case)
+    return 0

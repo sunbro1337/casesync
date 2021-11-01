@@ -1,9 +1,14 @@
-from tesrail_test  import get_case_request
+from testrail.methods_testrail import GetMethod
+import tesrail_test
 
 if __name__ == '__main__':
-    get_case_request(
-        client_url='',
-        client_user='',
-        client_password='',
-        case_id=''
+    client = tesrail_test.auth_client(
+        url='',
+        user='',
+        password=''
+    )
+    tesrail_test.get_request(
+        client,
+        method=GetMethod.GET_CASE,
+        case_id='10640173'
     )
