@@ -1,3 +1,4 @@
+import datetime
 from testrail.testrail import *
 from pprint import pprint
 from file_manager import create_json
@@ -11,9 +12,9 @@ def auth_client(url, user, password):
     return client
 
 
-def get_request(client, method: GetMethod, case_id='') -> int:
-    case = client.send_get(f'{method}/{case_id}')
-    print(type(case))
-    pprint(case)
-    create_json("case_1", case)
+def get_request(client, method: GetMethod) -> int:
+    result = client.send_get(f'{method}')
+    print(type(result))
+    pprint(result)
+    create_json(datetime.datetime.now(), result)
     return 0
