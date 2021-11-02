@@ -8,7 +8,11 @@ class GetMethod:
         self.GET_HISTORY_FOR_CASE = "get_history_for_case"
 
     def get_case(self, case_id=1, *_filters: GetCaseFilter):
-        return f"{self.GET_CASE}/{case_id}{_filters}"
+        _filters_str = ''
+        if _filters:
+            for i in _filters:
+                _filters_str = _filters_str + str(i)
+        return f"{self.GET_CASE}/{case_id}{_filters_str}"
 
     def get_case_more(self, project_id, suite_id):
         return f"{self.GET_CASES}/{project_id}&suite_id={suite_id}"
@@ -17,6 +21,6 @@ class GetMethod:
         return f"{self.GET_HISTORY_FOR_CASE}/{case_id}"
 
 
-test = GetMethod()
-result = test.get_case(var=1, GetCaseFilter.created_after(var="03.10.11"), GetCaseFilter.created_before(var="13.10.12"))
-
+get_method = GetMethod()
+get_case_filter = GetCaseFilter()
+print(get_method.get_case(1, get_case_filter.created_after("01"), get_case_filter.created_before("02")))
