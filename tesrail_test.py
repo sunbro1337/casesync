@@ -2,7 +2,7 @@ import datetime
 from testrail.testrail import *
 from pprint import pprint
 from file_manager import create_json
-from testrail.methods_testrail import GetMethod
+from testrail.cases_methods import GetMethod, PostMethod
 
 
 def auth_client(url, user, password):
@@ -13,8 +13,15 @@ def auth_client(url, user, password):
 
 
 def get_request(client, method: GetMethod) -> int:
-    result = client.send_get(f'{method}')
+    result = client.send_get(method)
     print(type(result))
     pprint(result)
-    create_json(datetime.datetime.now(), result)
+    # create_json(datetime.datetime.now(), result)
+    return 0
+
+
+def post_request(client, method: PostMethod, data) -> int:
+    result = client.send_post(method, data)
+    print(type(result))
+    pprint(result)
     return 0
