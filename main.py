@@ -1,5 +1,4 @@
-import sys
-from xml.etree import ElementTree
+from file_manager import parse_template_config
 
 from testrail.requests import *
 from testrail.parameters import GetCaseMoreParameter
@@ -7,19 +6,6 @@ from testrail.cases_methods import GetMethod, PostMethod
 
 
 WOWSC_PROJECT_ID = 21
-
-
-def parse_template_config(tag):
-    result = None
-    for event, elem in ElementTree.iterparse("template_config.xml"):
-        if elem.tag == tag:
-            result = elem.text
-            elem.clear()
-    if result:
-        return str(result)
-    else:
-        print("Not found")
-        sys.exit()
 
 
 if __name__ == '__main__':
