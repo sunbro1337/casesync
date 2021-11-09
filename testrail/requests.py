@@ -1,4 +1,3 @@
-import datetime
 from testrail.testrail import *
 from pprint import pprint
 from file_manager import create_json

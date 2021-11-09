@@ -1,36 +1,38 @@
-from filters import GetCaseFilter
+from .parameters import GetCaseMoreParameter
 
 
-def create_filter(_filters):
-    _filters_str = ''
-    for i in _filters:
-        _filters_str = _filters_str + str(i)
-    return _filters_str
+class Method:
+    @staticmethod
+    def create_query_str(parameters):
+        query_str = ''
+        for i in parameters:
+            query_str = query_str + str(i)
+        return query_str
 
 
-class GetMethod:
+class GetMethod(Method):
     def __init__(self):
         self.GET_CASE = "get_case"
         self.GET_CASES = "get_cases"
         self.GET_HISTORY_FOR_CASE = "get_history_for_case"
 
-    def get_case(self, case_id=1):
+    def get_case(self, case_id: int):
         return f"{self.GET_CASE}/{case_id}"
 
-    def get_case_more(self, project_id: int, suite_id: int, *_filters: GetCaseFilter):
-        if _filters:
-            return f"{self.GET_CASES}/{project_id}&suite_id={suite_id}{create_filter(_filters)}"
+    def get_case_more(self, project_id: int, suite_id: int, *parameters: GetCaseMoreParameter):
+        if parameters:
+            return f"{self.GET_CASES}/{project_id}&suite_id={suite_id}{self.create_query_str(parameters)}"
         else:
             return f"{self.GET_CASES}/{project_id}&suite_id={suite_id}"
 
-    def get_history_for_case(self, case_id, *_filters: GetCaseFilter):
-        if _filters:
-            return f"{self.GET_HISTORY_FOR_CASE}/{case_id}{create_filter(_filters)}"
+    def get_history_for_case(self, case_id, *parameters):
+        if parameters:
+            return f"{self.GET_HISTORY_FOR_CASE}/{case_id}{self.create_query_str(parameters)}"
         else:
             return f"{self.GET_HISTORY_FOR_CASE}/{case_id}"
 
 
-class PostMethod:
+class PostMethod(Method):
     def __init__(self):
         self.ADD_CASE = "add_case"
         self.COPY_CASES_TO_SELECTION = "copy_cases_to_section"
@@ -40,8 +42,8 @@ class PostMethod:
         self.DELETE_CASE = "delete_case"
         self.DELETE_CASES = "delete_cases"
 
-    def add_case(self, section_id: int):
-        return f"{self.ADD_CASE}/{section_id}"
+    def add_case(self, section_id: int, title: str):
+        return f"{self.ADD_CASE}/{section_id}&title={title}"
 
     def copy_cases_to_section(self, section_id: int):
         return f"{self.COPY_CASES_TO_SELECTION}/{section_id}"
@@ -68,16 +70,10 @@ class PostMethod:
             return f"{self.DELETE_CASES}/{project_id}&{suite_id}"
 
 
-"""Tests"""
-print(GetMethod().get_case_more(
-    111,
-    222,
-    GetCaseFilter().create(
-        _filter=GetCaseFilter().CREATED_AFTER,
-        var="02.11.12"
-    ),
-    GetCaseFilter().create(
-        _filter=GetCaseFilter().CREATED_BEFORE,
-        var="02.11.13"
-    )
-))
+# Examples
+result = GetMethod().get_case_more(
+    1,
+    2,
+    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_AFTER, "02"),
+    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_BEFORE, "02")
+)
