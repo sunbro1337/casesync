@@ -4,6 +4,11 @@ from .parameters import GetCaseMoreParameter
 class Method:
     @staticmethod
     def create_query_str(parameters):
+        """
+        Create a query string for child method
+        :param parameters: number of parameters for query string from ./parameters.py
+        :return: query string (str)
+        """
         query_str = ''
         for i in parameters:
             query_str = query_str + str(i)
