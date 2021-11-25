@@ -1,6 +1,12 @@
 class Parameter:
     @staticmethod
     def create(parameter, var):
+        """
+        Create a parameter for child classes
+        :param parameter: parameter of child class
+        :param var: variable for parameter
+        :return: format query string parameter : str
+        """
         return f"&{parameter}={var}"
 
 

@@ -23,7 +23,7 @@ def get_request(client, method: GetMethod) -> int:
     Get method to TestRail, that create file.xml with responses data
     :param client: client APIClient instance
     :param method: GetMethod instance from ./cases_methods
-    :return: int status
+    :return: status : int
     """
     result = client.send_get(method)
     print(type(result))
@@ -40,7 +40,7 @@ def post_request(client, method: PostMethod, data) -> int:
     :param data: The data to submit as part of the request as a dict; strings
                 must be UTF-8 encoded. If adding an attachment, must be the
                 path to the file.
-    :return: int status
+    :return: status : int
     """
     result = client.send_post(method, data)
     print(type(result))
