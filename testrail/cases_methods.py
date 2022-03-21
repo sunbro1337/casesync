@@ -76,9 +76,11 @@ class PostMethod(Method):
 
 
 # Examples
-result = GetMethod().get_case_more(
-    1,
-    2,
-    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_AFTER, "02"),
-    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_BEFORE, "02")
-)
+#result = GetMethod().get_case_more(
+#    1,
+#    2,
+#    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_AFTER, "02"),
+#    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_BEFORE, "02")
+#)
+#
+#print(result)

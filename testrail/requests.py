@@ -29,7 +29,7 @@ def get_request(client, method: GetMethod) -> int:
     print(type(result))
     pprint(result)
     # create_xml(datetime.datetime.now(), result)
-    return 0
+    return result
 
 
 def post_request(client, method: PostMethod, data) -> int:
@@ -45,4 +45,4 @@ def post_request(client, method: PostMethod, data) -> int:
     result = client.send_post(method, data)
     print(type(result))
     pprint(result)
-    return 0
+    return result
