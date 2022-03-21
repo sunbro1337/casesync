@@ -1,5 +1,12 @@
 # WelcomeToMars
 
+## Workflow for this repo
+- create branch with commit
+- update readme with commit
+- complete task with commit
+- update readme with commit
+- pull request for branch with branch notes
+
 
 ## Useful links
 
