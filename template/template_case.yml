@@ -1,0 +1,12 @@
+case:
+  # comment
+  description: description
+  precondition: precondition
+  steps:
+    - 1 step
+    - 2 step
+    - 3 step
+  expectations:
+    - 1 exp
+    - 2 exp
+    - 3 exp
