@@ -1,6 +1,5 @@
 from testrail.testrail import *
 from pprint import pprint
-from file_manager import create_xml
 from testrail.cases_methods import GetMethod, PostMethod
 
 

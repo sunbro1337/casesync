@@ -1,12 +1,8 @@
+import os.path
 import sys
 from xml.etree import ElementTree
-
-
-def create_xml(name_file, data):
-    file = open(f"{name_file}.xml", "w", encoding="utf-8")
-    for key in data.keys():
-        print(f"{key}: {data[key]}", file=file)
-    file.close()
+import json
+import yaml
 
 
 def parse_template_config(tag):
@@ -22,14 +18,15 @@ def parse_template_config(tag):
         print(f"{template_config} not found")
         sys.exit()
 
+def create_json(path, data):
+    json_data = json.dumps(data, indent=4)
+    json_file = open(f"{path}.json", 'w')
+    json_file.writelines(json_data)
+    json_file.close()
+    return 0
 
-def parse_case_file(file):
-    case_dict = {
-        "description": "",
-        "precondition": "",
-        "steps": [],
-    }
-    for event, element in ElementTree.iterparse(file):
-        for i in case_dict:
-            pass
-    # TODO
+def create_yaml(path, data):
+    yaml_file = open(f"{path}.yml", 'w')
+    yaml_data = yaml.dump(data, yaml_file)
+    yaml_file.close()
+    return 0

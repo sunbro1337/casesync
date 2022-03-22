@@ -1,15 +1,15 @@
 <case>
     <!-- comment -->
-    <description> </description>
-    <precondition> </precondition>
+    <description> description </description>
+    <precondition> precondition </precondition>
     <steps>
-        <step1> </step1>
-        <step2> </step2>
-        <step3> </step3>
+        <step1> step1 </step1>
+        <step2> step2 </step2>
+        <step3> step3 </step3>
     </steps>
     <expectations>
-        <exp1> </exp1>
-        <exp2> </exp2>
-        <exp3> </exp3>
+        <exp1> exp1 </exp1>
+        <exp2> exp2 </exp2>
+        <exp3> exp3 </exp3>
     </expectations>
 </case>

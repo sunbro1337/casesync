@@ -16,6 +16,11 @@
 - https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
 
 
+### Json, Yaml
+- https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
+- https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
+
+
 ## Improves:
 
 ### Git
