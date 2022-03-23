@@ -1,0 +1,37 @@
+custom_steps_separated:
+- content: 'astep
+
+    bstep
+
+    cstep
+
+    '
+  expected: 'astep bstep cstep
+
+    '
+- content: '1astep
+
+    1bstep
+
+    1cstep
+
+    '
+  expected: '1astep 1bstep 1cstep
+
+    '
+- content: 2astep\n2bstep\n2cstep
+  expected: '2astep
+
+    2bstep
+
+    2cstep'
+description: description
+expectations:
+- 1 exp
+- 2 exp
+- 3 exp
+precondition: precondition
+steps:
+- 1 step
+- 2 step
+- 3 step

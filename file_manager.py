@@ -19,14 +19,27 @@ def parse_template_config(tag):
         sys.exit()
 
 def create_json(path, data):
-    json_data = json.dumps(data, indent=4)
-    json_file = open(f"{path}.json", 'w')
-    json_file.writelines(json_data)
+    path = f"{path}.json"
+    json_file = open(path, 'w', encoding="utf8")
+    json.dump(data, json_file , indent=4, ensure_ascii=False)
     json_file.close()
-    return 0
+    return path
+
+def read_json(path):
+    json_file = open(f"{path}.json", 'r', encoding="utf8")
+    json_data = json.load(json_file)
+    json_file.close()
+    return json_data
 
 def create_yaml(path, data):
-    yaml_file = open(f"{path}.yml", 'w')
-    yaml_data = yaml.dump(data, yaml_file)
+    path = f"{path}.yml"
+    yaml_file = open(path, 'w', encoding="utf8")
+    yaml.dump(data, yaml_file, allow_unicode=True)
     yaml_file.close()
-    return 0
+    return path
+
+def read_yaml(path):
+    yaml_file = open(f"{path}.yml", 'r', encoding="utf8")
+    yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
+    yaml_file.close()
+    return yaml_data

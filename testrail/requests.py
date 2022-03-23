@@ -25,9 +25,9 @@ def get_request(client, method: GetMethod):
     :return: status : int
     """
     result = client.send_get(method)
-    print(type(result))
-    pprint(result)
-    # create_xml(datetime.datetime.now(), result)
+    # print('GET method result:')
+    # print(type(result))
+    # pprint(result)
     return result
 
 
@@ -42,6 +42,7 @@ def post_request(client, method: PostMethod, data):
     :return: status : int
     """
     result = client.send_post(method, data)
-    print(type(result))
-    pprint(result)
+    # print('POST method result:')
+    # print(type(result))
+    # pprint(result)
     return result

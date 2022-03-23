@@ -44,7 +44,7 @@
 
 ### In progres
 
-- testcase file format(yml, xml, json)
+- testcase file format(yml, json)
 
 
 ## Done:
