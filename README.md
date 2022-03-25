@@ -10,6 +10,7 @@
 
 ## Useful links
 
+- https://www.gurock.com/testrail/docs/api/getting-started/binding-python/
 - https://docs.gitlab.com/ee/ci/test_cases/
 - https://www.gurock.com/testrail/github-test-management
 - https://blog.gurock.com/test-version-control/
@@ -44,10 +45,11 @@
 
 ### In progres
 
-- testcase file format(yml, json)
+- 
 
 
 ## Done:
 
 - research testrail api
 - first testrail api implements
+- testcase file format(yml, json)
