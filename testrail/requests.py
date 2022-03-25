@@ -1,10 +1,9 @@
 from testrail.testrail import *
 from pprint import pprint
-from file_manager import create_xml
 from testrail.cases_methods import GetMethod, PostMethod
 
 
-def auth_client(url, user, password):
+def auth_client(url, user, password) -> APIClient:
     """
     Authorization client function
     :param url: url of ur TestRail repo expl: https://testrail.company.net/project
@@ -18,7 +17,7 @@ def auth_client(url, user, password):
     return client
 
 
-def get_request(client, method: GetMethod) -> int:
+def get_request(client, method: GetMethod):
     """
     Get method to TestRail, that create file.xml with responses data
     :param client: client APIClient instance
@@ -26,13 +25,13 @@ def get_request(client, method: GetMethod) -> int:
     :return: status : int
     """
     result = client.send_get(method)
-    print(type(result))
-    pprint(result)
-    # create_xml(datetime.datetime.now(), result)
+    # print('GET method result:')
+    # print(type(result))
+    # pprint(result)
     return result
 
 
-def post_request(client, method: PostMethod, data) -> int:
+def post_request(client, method: PostMethod, data):
     """
     Post method to TestRail
     :param client: client APIClient instance
@@ -43,6 +42,7 @@ def post_request(client, method: PostMethod, data) -> int:
     :return: status : int
     """
     result = client.send_post(method, data)
-    print(type(result))
-    pprint(result)
+    # print('POST method result:')
+    # print(type(result))
+    # pprint(result)
     return result

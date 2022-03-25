@@ -69,10 +69,7 @@ class PostMethod(Method):
         return f"{self.DELETE_CASE}/{case_id}"
 
     def delete_case_more(self, project_id, suite_id, soft=None):
-        if soft:
-            return f"{self.DELETE_CASES}/{project_id}&{suite_id}&soft=1"
-        else:
-            return f"{self.DELETE_CASES}/{project_id}&{suite_id}"
+        return f"{self.DELETE_CASES}/{project_id}&{suite_id}{'&soft=1' if soft else ''}"
 
 
 # Examples
