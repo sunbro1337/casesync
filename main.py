@@ -1,3 +1,6 @@
+import os.path
+import sys
+
 from file_manager import parse_template_config
 
 from testrail.requests import *
@@ -6,7 +9,41 @@ from testrail.cases_methods import GetMethod, PostMethod
 from file_manager import create_json, create_yaml, read_json, read_yaml
 
 
-WOWSC_PROJECT_ID = 21
+PROJECT_NAME = "WOWSC"
+SUITE_NAME = "[Mobile: Render]"
+CASE_PATH = "test_cases"
+
+
+def find_project(client: APIClient, project_name: str) -> dict or None:
+    for project in get_request(client, GetMethod().get_projects()):
+        if project['name'] == project_name:
+            print(f"Find project with name {project_name}: {project}")
+            return project
+    else:
+        print(f"Not found project with name {project_name}")
+        return None
+
+
+def find_suite(client: APIClient, project_id: int, suite_name: str) -> dict or None:
+    for suite in get_request(client, GetMethod().get_suites(project_id)):
+        if suite['name'] == suite_name:
+            print(f"Find suite with name {suite_name}: {suite}")
+            return suite
+    else:
+        print(f"Not found suite with name {suite_name}")
+        return None
+
+def find_cases_for_suite(client, project_id, suite: dict):
+    cases = get_request(client, GetMethod().get_cases(
+        project_id=project_id,
+        suite_id=suite['id']
+    ))
+    if cases:
+        print(f"Found cases for suite {suite['id']} with name {suite['name']}")
+        return cases
+    else:
+        print(f"Not found cases for suite {suite['id']} with name {suite['name']}")
+        return None
 
 
 if __name__ == '__main__':
@@ -16,32 +53,41 @@ if __name__ == '__main__':
         password=parse_template_config("password")
     )
 
-    data = get_request(
+    # find project
+    project = find_project(
         client=client,
-        method=GetMethod().get_case(12486969)
+        project_name=PROJECT_NAME
     )
+    assert project
 
-    # get_request(
-    #     client=client,
-    #     method=GetMethod().get_case_more(
-    #         WOWSC_PROJECT_ID,
-    #         13316,
-    #         GetCaseMoreParameter.create(GetCaseMoreParameter.LIMIT, 2)
-    #     )
-    # )
-    template_case = "template/template_case"
-    path_to_case = f"test_cases/{data['id']}"
+# example for update case base method
+    for suite in get_request(client, GetMethod().get_suites(project['id'])):
 
-    #create_json(path_to_case, data)
-    #print("Json data:")
-    #pprint(read_json(path_to_case))
+        #suite = find_suite(
+        #    client=client,
+        #    project_id=project['id'],
+        #    suite_name=SUITE_NAME
+        #)
+        #assert suite
 
-    #create_yaml(path_to_case, data)
-    #print("Yaml data:")
-    #pprint(read_yaml(path_to_case))
+        cases = find_cases_for_suite(
+            client=client,
+            project_id=project['id'],
+            suite=suite,
+        )
 
-    pprint(read_json(template_case))
-    create_json(f"{template_case}1", read_json(template_case))
-    pprint(read_yaml(template_case))
-    create_yaml(f"{template_case}1", read_yaml(template_case))
+        if not cases:
+            continue
 
+        for case in cases:
+            create_json(
+                name=f"{case['id']}_{case['title']}",
+                path=os.path.join(CASE_PATH, suite['name']),
+                data=case
+            )
+            create_yaml(
+                name=f"{case['id']}_{case['title']}",
+                path=os.path.join(CASE_PATH, suite['name']),
+                data=case
+            )
+        print(f"Cases has been created for suite {suite['id']} with name {suite['name']}")
