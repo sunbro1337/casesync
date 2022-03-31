@@ -22,6 +22,9 @@ def parse_template_config(tag):
         sys.exit()
 
 def check_name(name):
+    if len(name) > LEN_FOR_NAMES:
+        name = name[:LEN_FOR_NAMES]
+    name = name.strip()
     return re.sub(MASKS_FOR_NAMES, '', name)
 
 def check_path(path: str) -> str:
