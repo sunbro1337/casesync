@@ -1,4 +1,4 @@
-from .parameters import GetCaseMoreParameter
+from .parameters import GetCasesParameter, PostAddCaseParameter
 
 
 class Method:
@@ -27,12 +27,15 @@ class GetMethod(Method):
         # api/reference/suites/
         self.GET_SUITE = "get_suite"
         self.GET_SUITES = "get_suites"
+        # api/reference/sections/
+        self.GET_SECTION = "get_section"
+        self.GET_SECTIONS = "get_sections"
 
     # api/reference/cases/
     def get_case(self, case_id: int):
         return f"{self.GET_CASE}/{case_id}"
 
-    def get_cases(self, project_id: int, suite_id: int, *parameters: GetCaseMoreParameter):
+    def get_cases(self, project_id: int, suite_id: int, *parameters: GetCasesParameter):
         return \
             f"{self.GET_CASES}/{project_id}&suite_id={suite_id}{self.create_query_str(parameters) if parameters else ''}"
 
@@ -53,6 +56,15 @@ class GetMethod(Method):
     def get_suites(self, project_id):
         return f"{self.GET_SUITES}/{project_id}"
 
+    # api/reference/sections/
+    def get_section(self, section_id):
+        return f"{self.GET_SECTION}/{section_id}"
+
+    def get_sections(self, project_id, suite_id):
+        # The ID of the test suite (optional if the project is operating in single suite mode). Now it's required.
+        return f"{self.GET_SECTIONS}/{project_id}&suite_id={suite_id}"
+
+
 
 class PostMethod(Method):
     def __init__(self):
@@ -68,10 +80,14 @@ class PostMethod(Method):
         self.ADD_SUITE = "add_suite"
         self.UPDATE_SUITE = "update_suite"
         self.DELETE_SUITE = "delete_suite"
+        # api/reference/sections/
+        self.ADD_SECTION = "add_section"
+        self.UPDATE_SECTION = "update_section"
+        self.DELETE_SECTION = "delete_section"
 
-
-    def add_case(self, section_id: int, title: str):
-        return f"{self.ADD_CASE}/{section_id}&title={title}"
+    # api/reference/cases/
+    def add_case(self, section_id: int, title: str, *parameters: PostAddCaseParameter):
+        return f"{self.ADD_CASE}/{section_id}&title={title}{self.create_query_str(parameters) if parameters else ''}"
 
     def copy_cases_to_section(self, section_id: int):
         return f"{self.COPY_CASES_TO_SELECTION}/{section_id}"
@@ -94,19 +110,29 @@ class PostMethod(Method):
     def delete_case_more(self, project_id, suite_id, soft=None):
         return f"{self.DELETE_CASES}/{project_id}&{suite_id}{'&soft=1' if soft else ''}"
 
+    # api/reference/suites/
     def add_suite(self, project_id):
         return f"{self.ADD_SUITE}/{project_id}"
 
     def update_suite(self, suite_id):
         return f"{self.ADD_SUITE}/{suite_id}"
 
+    # api/reference/sections/
+    def add_section(self, name, *parameters):
+        return f"{self.ADD_SECTION}/{name}{self.create_query_str(parameters) if parameters else ''}"
+
+    def update_section(self, section_id):
+        return f"{self.UPDATE_SECTION}/{section_id}"
+
+    def delete_section(self, section_id):
+        return f"{self.DELETE_SECTION}/{section_id}"
 
 # Examples
-#result = GetMethod().get_cases(
-#    1,
-#    2,
-#    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_AFTER, "02"),
-#    GetCaseMoreParameter.create(GetCaseMoreParameter.CREATED_BEFORE, "02")
-#)
+# result = GetMethod().get_cases(
+#     1,
+#     2,
+#     GetCasesParameter.create(GetCasesParameter.CREATED_AFTER, "02"),
+#     GetCasesParameter.create(GetCasesParameter.CREATED_BEFORE, "02")
+# )
 #
-#print(result)
+# print(result)

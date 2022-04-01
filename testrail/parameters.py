@@ -11,7 +11,7 @@ class Parameter:
 
 
 # Parameters for GET method
-class GetCaseMoreParameter(Parameter):
+class GetCasesParameter(Parameter):
     CREATED_AFTER = "created_after"
     CREATED_BEFORE = "created_before"
     CREATED_BY = "created_by"

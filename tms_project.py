@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from testrail.parameters import GetCaseMoreParameter
+from testrail.parameters import GetCasesParameter
 from testrail.cases_methods import GetMethod, PostMethod
 from testrail.requests import *
 from file_manager import create_json, create_yaml, read_json, read_yaml
@@ -10,6 +10,8 @@ from file_manager import create_json, create_yaml, read_json, read_yaml
 class TMSProject:
     def __init__(self, client: APIClient, client_info: dict):
         self.client = client
+        assert client
+
         self.project = self.find_project(
             client=client,
             project_name=client_info['project_name']
@@ -20,6 +22,7 @@ class TMSProject:
         assert self.suites
 
         self.cur_dir = client_info['case_path']
+        assert self.cur_dir
         # self.cur_suite = None
         # self.cur_cases = None
 
@@ -32,7 +35,7 @@ class TMSProject:
             print(f"Not found project with name {project_name}")
             return None
 
-    def find_suite(self, suite_name: str) -> dict or None:
+    def find_suite_by_name(self, suite_name: str) -> dict or None:
         for suite in self.suites:
             if suite['name'] == suite_name:
                 print(f"Find suite with name {suite_name}: {suite}")
@@ -87,3 +90,43 @@ class TMSProject:
         for dir in os.listdir(path):
             print(f"rm -r dir {path}/{dir}")
             shutil.rmtree(os.path.join(path, dir))
+
+    def update_case(self, case_path):
+        data = read_yaml(case_path)
+        post_request(self.client, PostMethod().update_case(data['id']), data)
+
+    def add_case(self, case_path):
+        data = read_yaml(case_path)
+        post_request(
+            client=self.client,
+            method=PostMethod().add_case(data['section_id'], data['title']),
+            data=data
+        )
+        print(f"Case {data['title']} has been added for section {data['section_id']}")
+
+    def find_sections(self, suite):
+        sections = get_request(
+            client=self.client,
+            method=GetMethod().get_sections(
+                project_id=self.project[id],
+                suite_id=suite['id']
+            )
+        )
+        return sections
+
+    def find_section_by_name(self, name: str, suite: dict) -> None or dict:
+        sections = self.find_sections(suite)
+        if not sections:
+            print(f"Not found sections for suite {suite['id']}")
+            return None
+        for section in sections:
+            if section['name'] == name:
+                print(f"Found section with name {name} for suite {suite['id']}")
+                return section
+        else:
+            print(f"Not found any section for suite {suite['id']}")
+            return None
+
+    def add_section(self):
+        #TODO
+        pass

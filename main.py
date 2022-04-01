@@ -1,4 +1,6 @@
-from file_manager import parse_template_config
+import os.path
+
+from file_manager import parse_template_config, read_yaml, read_json
 from testrail.requests import *
 from tms_project import TMSProject
 
@@ -21,5 +23,7 @@ if __name__ == '__main__':
         client = client,
         client_info=client_info
     )
-    project.case_local_clear()
-    project.update_suite(project.find_suite(SUITE_NAME))
+    # project.case_local_clear()
+    # project.update_case(os.path.join('test_cases', 'с_Mobile_sandbox', '13092365_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'))
+    # project.add_case(os.path.join('test_cases', 'с_Mobile_sandbox', 'Lorem'))
+    # project.update_suite(project.find_suite_by_name(SUITE_NAME))

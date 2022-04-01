@@ -31,7 +31,7 @@ def get_request(client, method: GetMethod) -> dict:
     return result
 
 
-def post_request(client, method: PostMethod, data) -> dict:
+def post_request(client, method: PostMethod, data: dict) -> dict:
     """
     Post method to TestRail
     :param client: client APIClient instance
