@@ -118,7 +118,7 @@ class PostMethod(Method):
         return f"{self.ADD_SUITE}/{suite_id}"
 
     # api/reference/sections/
-    def add_section(self, project_id,):
+    def add_section(self, project_id):
         return f"{self.ADD_SECTION}/{project_id}"
 
     def update_section(self, section_id):

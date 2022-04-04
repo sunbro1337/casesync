@@ -27,3 +27,4 @@ if __name__ == '__main__':
     # project.update_case(os.path.join('test_cases', 'с_Mobile_sandbox', '13092365_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'))
     # project.add_case(os.path.join('test_cases', 'с_Mobile_sandbox', 'Lorem'))
     # project.update_suite(project.find_suite_by_name(SUITE_NAME))
+    # project.add_section()

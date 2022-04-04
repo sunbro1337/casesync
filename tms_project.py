@@ -128,5 +128,10 @@ class TMSProject:
             return None
 
     def add_section(self, description, suite_id, parent_id, name):
-        #TODO
-        pass
+        section_data = {
+            'description': description,
+            'suite_id': suite_id,
+            'parent_id': parent_id,
+            'name': name
+        }
+        post_request(self.client, PostMethod().add_section(self.project['id']), section_data)
