@@ -127,6 +127,6 @@ class TMSProject:
             print(f"Not found any section for suite {suite['id']}")
             return None
 
-    def add_section(self):
+    def add_section(self, description, suite_id, parent_id, name):
         #TODO
         pass

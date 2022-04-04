@@ -107,8 +107,8 @@ class PostMethod(Method):
     def delete_case(self, case_id):
         return f"{self.DELETE_CASE}/{case_id}"
 
-    def delete_case_more(self, project_id, suite_id, soft=None):
-        return f"{self.DELETE_CASES}/{project_id}&{suite_id}{'&soft=1' if soft else ''}"
+    def delete_cases(self, project_id, suite_id, soft=False):
+        return f"{self.DELETE_CASES}/{project_id}&suite_id={suite_id}{'&soft=1' if soft else ''}"
 
     # api/reference/suites/
     def add_suite(self, project_id):
@@ -118,14 +118,14 @@ class PostMethod(Method):
         return f"{self.ADD_SUITE}/{suite_id}"
 
     # api/reference/sections/
-    def add_section(self, name, *parameters):
-        return f"{self.ADD_SECTION}/{name}{self.create_query_str(parameters) if parameters else ''}"
+    def add_section(self, project_id,):
+        return f"{self.ADD_SECTION}/{project_id}"
 
     def update_section(self, section_id):
         return f"{self.UPDATE_SECTION}/{section_id}"
 
-    def delete_section(self, section_id):
-        return f"{self.DELETE_SECTION}/{section_id}"
+    def delete_section(self, section_id, soft=False):
+        return f"{self.DELETE_SECTION}/{section_id}{'&soft=1' if soft else ''}"
 
 # Examples
 # result = GetMethod().get_cases(

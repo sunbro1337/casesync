@@ -36,6 +36,7 @@
 
 - research testrail version system https://blog.gurock.com/test-version-control/
 - write docs for testrail lib
+- sync comments for cases_methods with testrail api doc
 
 
 ### Tech
