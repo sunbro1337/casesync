@@ -54,6 +54,7 @@
 
 - testcase system for test design
 - manipulations with cases
+- log system or lib
 
 
 ## Done:

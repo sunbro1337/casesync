@@ -30,7 +30,7 @@ def check_name(name):
 def check_path(path: str) -> str:
     path = re.sub(MASKS_FOR_DIRS, '', path) # WARNING replaces / char
     if not os.path.exists(path):
-        os.mkdir(path)
+        os.makedirs(path)
     return path
 
 def create_json(name: str, path: str, data: dict) -> str:
