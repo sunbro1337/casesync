@@ -1,11 +1,19 @@
+import hashlib
+import logging
 import os.path
 import re
+import shutil
 import sys
+import zlib
 from xml.etree import ElementTree
 import json
 import yaml
 
 from configs.settings import *
+from logger import create_logger
+
+
+logger = create_logger('file_manager', logger_lvl=logging.DEBUG)
 
 
 def parse_template_config(tag):
@@ -28,33 +36,69 @@ def check_name(name):
     return re.sub(MASKS_FOR_NAMES, '', name)
 
 def check_path(path: str) -> str:
+    logger.debug(f"Checking path '{path}'")
+    split_char = '/'
+    if sys.platform == 'win32':
+        split_char = '\\'
     path = re.sub(MASKS_FOR_DIRS, '', path) # WARNING replaces / char
+    for dir in path.split(split_char):
+        path = path.replace(dir, dir.strip())
     if not os.path.exists(path):
+        logger.debug(f"Path {path} not found")
         os.makedirs(path)
+        logger.debug(f"Path {path} has ben created")
+    logger.debug(f"Path '{path}' has been checked")
     return path
 
-def create_json(name: str, path: str, data: dict) -> str:
-    path = os.path.join(check_path(path), check_name(name))
-    json_file = open(f"{path}.json", 'w', encoding="utf8")
+def calculate_crc(dict):
+    return lambda x,y : x^y, [hash(repr(item)) for item in dict.items()]
+
+def check_crc(dict_1, dict_2):
+    if calculate_crc(dict_1) == calculate_crc(dict_2):
+        return True
+    else:
+        return False
+
+def remove_path(path):
+    logger.info(f"Path for rmdir {path}")
+    try:
+        shutil.rmtree(path)
+        logger.info(f"Dir {path} has been removed")
+        return True
+    except FileNotFoundError:
+        logger.info(f"Not found path for rmdir {path}")
+        return False
+
+def create_json(name: str, path: str, data: dict, soft=True) -> str or bool:
+    path = os.path.join(check_path(path), f"{check_name(name)}.json")
+    if os.path.exists(path) and soft:
+        logger.debug(f"Skip create {path} already exist")
+        return False
+    json_file = open(f"{path}", 'w', encoding="utf8")
     json.dump(data, json_file , indent=4, ensure_ascii=False)
     json_file.close()
+    logger.debug(f"File {path} created")
     return path
 
 def read_json(path: str):
-    json_file = open(f"{path}.json", 'r', encoding="utf8")
+    json_file = open(f"{path}", 'r', encoding="utf8")
     json_data = json.load(json_file)
     json_file.close()
     return json_data
 
-def create_yaml(name: str, path: str, data: dict) -> str:
-    path = os.path.join(check_path(path), check_name(name))
-    yaml_file = open(f"{path}.yml", 'w', encoding="utf8")
+def create_yaml(name: str, path: str, data: dict, soft=True) -> str or bool:
+    path = os.path.join(check_path(path),  f"{check_name(name)}.yml")
+    if os.path.exists(path) and soft:
+        logger.debug(f"Skip create {path} already exist")
+        return False
+    yaml_file = open(f"{path}", 'w', encoding="utf8")
     yaml.dump(data, yaml_file, allow_unicode=True)
     yaml_file.close()
+    logger.debug(f"File {path} created, crc: {calculate_crc(read_yaml(path))}")
     return path
 
 def read_yaml(path: str):
-    yaml_file = open(f"{path}.yml", 'r', encoding="utf8")
+    yaml_file = open(f"{path}", 'r', encoding="utf8")
     yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
     yaml_file.close()
     return yaml_data

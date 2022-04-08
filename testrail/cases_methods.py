@@ -78,7 +78,7 @@ class PostMethod(Method):
         self.DELETE_CASES = "delete_cases"
         # api/reference/suites/
         self.ADD_SUITE = "add_suite"
-        self.UPDATE_SUITE = "update_suite"
+        self.UPDATE_SUITE = "download_suite"
         self.DELETE_SUITE = "delete_suite"
         # api/reference/sections/
         self.ADD_SECTION = "add_section"

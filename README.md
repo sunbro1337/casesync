@@ -47,10 +47,10 @@
 
 ### Test design
 
-- 
+- Create test cases extension for code redactor(vs studio code)
 
 
-### In progres
+### In progress
 
 - testcase system for test design
 - manipulations with cases

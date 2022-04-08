@@ -11,7 +11,8 @@ from logger import create_logger
 SUITE_NAME = "с_Mobile_sandbox"
 client_info = {
     'project_name': "WOWSC",
-    'project_path': "test_cases"
+    'project_path': "test_cases",
+    'mask_suite_name': "Mobile"
 }
 logger = create_logger('main')
 
@@ -23,14 +24,21 @@ if __name__ == '__main__':
         password=parse_template_config("password")
     )
 
-    project = TMSProject(
+    tms_project = TMSProject(
         client = client,
         client_info=client_info
     )
-    for suite in project.suites:
-        tms_suite = TMSSuite(project, suite)
-        tms_suite.case_local_clear()
-        # tms_suite.update_suite(suite)
-    #tms_suite.update_case(os.path.join('test_cases', 'с_Mobile_sandbox', '13092365_Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'))
-    #tms_suite.add_case(os.path.join('test_cases', 'с_Mobile_sandbox', 'Lorem'))
-    #tms_suite.add_section()
+    logger.info("Start")
+    tms_suite = TMSSuite(tms_project)
+    tms_suite.download_suite(tms_project.suites[0], soft=False)
+    logger.info("Finish")
+
+"""
+1 without case_base_local_clear
+2022-04-08 17:46:08,942 - main - INFO - Start
+2022-04-08 17:47:12,348 - main - INFO - Finish
+
+2 with case_base_local_clear
+2022-04-08 17:49:04,579 - main - INFO - Start
+2022-04-08 17:50:09,239 - main - INFO - Finish
+"""
