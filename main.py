@@ -4,7 +4,7 @@ import os.path
 from file_manager import parse_template_config, read_yaml, read_json
 from testrail.requests import *
 from tms_project import TMSProject
-from tms_suite import TMSSuite
+from tms_suite import TMSSuites
 from logger import create_logger
 
 
@@ -12,7 +12,7 @@ SUITE_NAME = "с_Mobile_sandbox"
 client_info = {
     'project_name': "WOWSC",
     'project_path': "test_cases",
-    'mask_suite_name': "Mobile"
+    'mask_suite_name': None
 }
 logger = create_logger('main')
 
@@ -29,8 +29,7 @@ if __name__ == '__main__':
         client_info=client_info
     )
     logger.info("Start")
-    tms_suite = TMSSuite(tms_project)
-    tms_suite.download_suite(tms_project.suites[0], soft=False)
+    tms_suite = TMSSuites(tms_project)
     logger.info("Finish")
 
 """

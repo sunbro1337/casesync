@@ -13,7 +13,7 @@ from configs.settings import *
 from logger import create_logger
 
 
-logger = create_logger('file_manager', logger_lvl=logging.DEBUG)
+logger = create_logger('file_manager', logger_lvl=logging.INFO)
 
 
 def parse_template_config(tag):
@@ -70,6 +70,7 @@ def remove_path(path):
         return False
 
 def create_json(name: str, path: str, data: dict, soft=True) -> str or bool:
+    logger.debug(f"Start creating {path, name}")
     path = os.path.join(check_path(path), f"{check_name(name)}.json")
     if os.path.exists(path) and soft:
         logger.debug(f"Skip create {path} already exist")
@@ -87,6 +88,7 @@ def read_json(path: str):
     return json_data
 
 def create_yaml(name: str, path: str, data: dict, soft=True) -> str or bool:
+    logger.debug(f"Start creating {path, name}")
     path = os.path.join(check_path(path),  f"{check_name(name)}.yml")
     if os.path.exists(path) and soft:
         logger.debug(f"Skip create {path} already exist")
@@ -94,7 +96,7 @@ def create_yaml(name: str, path: str, data: dict, soft=True) -> str or bool:
     yaml_file = open(f"{path}", 'w', encoding="utf8")
     yaml.dump(data, yaml_file, allow_unicode=True)
     yaml_file.close()
-    logger.debug(f"File {path} created, crc: {calculate_crc(read_yaml(path))}")
+    logger.debug(f"File {path} created")
     return path
 
 def read_yaml(path: str):

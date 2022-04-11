@@ -10,15 +10,18 @@ from testrail.parameters import GetCasesParameter
 from testrail.cases_methods import GetMethod, PostMethod
 
 
-logger = create_logger('TMSSuite', logger_lvl=logging.WARNING)
+logger = create_logger('TMSSuite', logger_lvl=logging.DEBUG)
 
 
-class TMSSuite:
+class TMSSuites:
     def __init__(self, tms_project: TMSProject, cur_suite=None):
+        logger.debug("Start init TMSSuites")
         self.tms_project = tms_project
         assert self.tms_project
         self.cur_suite = cur_suite
-
+        self.sections = [self.find_sections(suite) for suite in self.tms_project.suites]
+        self.cases = [self.find_cases(tms_project.client, tms_project.project, suite) \
+                      for suite in self.tms_project.suites]
         logger.info(f"TMSSuite init with suite: {self.cur_suite}")
 
     # SUITES
@@ -47,20 +50,8 @@ class TMSSuite:
                 suite_id=suite['id']
             )
         )
+        logger.info(f"Section for suite {suite['id'], suite['name']} has been found")
         return sections
-
-    def find_section_by_name(self, name: str, suite: dict) -> None or dict:
-        sections = self.find_sections(suite)
-        if not sections:
-            logger.info(f"Not found sections for suite {suite['id']}")
-            return None
-        for section in sections:
-            if section['name'] == name:
-                logger.info(f"Found section with name {name} for suite {suite['id']}")
-                return section
-        else:
-            logger.info(f"Not found any section for suite {suite['id']}")
-            return None
 
     def add_section(self, description, suite_id, parent_id, name):
         section_data = {
@@ -72,29 +63,21 @@ class TMSSuite:
         post_request(self.tms_project.client, PostMethod().add_section(self.tms_project.project['id']), section_data)
 
     # CASES
-    def find_cases(self, client, project_id, suite: dict, section=None) -> dict or None:
+    def find_cases(self, client, project: dict, suite: dict, section=None) -> dict or None:
         cases = get_request(client, GetMethod().get_cases(
-            project_id,
+            project['id'],
             suite['id'],
             GetCasesParameter().create(GetCasesParameter.SECTION_ID, section['id'] if section else '')
         ))
         if cases:
-            logger.info(f"Found cases for suite: {suite['id'], suite['name']}, section {section['id'], section['name'] if section else ''}")
+            logger.info(f"Found cases for suite: {suite['id'], suite['name']}")
             return cases
         else:
             logger.info(f"Not found cases for suite {suite['id'], suite['name']}")
             return None
 
     def create_cases_for_suite(self, suite: dict, section=None, soft=True):
-        cases = self.find_cases(
-            client=self.tms_project.client,
-            project_id=self.tms_project.project['id'],
-            suite=suite,
-            section=section if section else ''
-        )
-        if not cases:
-            return False
-        for case in cases:
+        for case in self.cases:
             # WARNING: Json file format not usability for test design
             # create_json(
             #     name=f"{case['id']}_{case['title']}",
@@ -102,9 +85,12 @@ class TMSSuite:
             #     data=case,
             #     soft=soft
             # )
+            logger.debug("Start creating path")
+            path = os.path.join(self.tms_project.cur_dir, suite['name'].strip(), section['name'].strip() if section else '')
+            logger.debug("Path is created")
             create_yaml(
                 name=f"{case['id']}_{case['title']}",
-                path=os.path.join(self.tms_project.cur_dir, suite['name'].strip(), section['name'].strip() if section else ''),
+                path=path,
                 data=case,
                 soft=soft
             )

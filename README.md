@@ -52,9 +52,8 @@
 
 ### In progress
 
-- testcase system for test design
 - manipulations with cases
-- log system or lib
+- refactor create local case base
 
 
 ## Done:
@@ -74,3 +73,5 @@
 - testcase file format(yml, json)
 - download all case base and save it in a test-case format
 - class TMSProject
+- testcase system for test design
+- log system or lib
