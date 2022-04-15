@@ -13,7 +13,7 @@ from configs.settings import *
 from logger import create_logger
 
 
-logger = create_logger('file_manager', logger_lvl=logging.INFO)
+logger = create_logger('file_manager', logger_lvl=logging.WARNING)
 
 
 def parse_template_config(tag):
@@ -71,7 +71,7 @@ def remove_path(path):
 
 def create_json(name: str, path: str, data: dict, soft=True) -> str or bool:
     logger.debug(f"Start creating {path, name}")
-    path = os.path.join(check_path(path), f"{check_name(name)}.json")
+    path = os.path.join(path, f"{check_name(name)}.json")
     if os.path.exists(path) and soft:
         logger.debug(f"Skip create {path} already exist")
         return False
@@ -89,7 +89,7 @@ def read_json(path: str):
 
 def create_yaml(name: str, path: str, data: dict, soft=True) -> str or bool:
     logger.debug(f"Start creating {path, name}")
-    path = os.path.join(check_path(path),  f"{check_name(name)}.yml")
+    path = os.path.join(path,  f"{check_name(name)}.yml")
     if os.path.exists(path) and soft:
         logger.debug(f"Skip create {path} already exist")
         return False
@@ -104,3 +104,10 @@ def read_yaml(path: str):
     yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
     yaml_file.close()
     return yaml_data
+
+def get_dict_value_from_list(list: list, key: str, value, returned_key: str) -> dict or None:
+    for dict in list:
+        if dict[key] == value:
+            return dict[returned_key]
+    else:
+        return None

@@ -1,10 +1,10 @@
 import logging
 import os.path
 
-from file_manager import parse_template_config, read_yaml, read_json
+from file_manager import parse_template_config
 from testrail.requests import *
-from tms_project import TMSProject
-from tms_suite import TMSSuites
+from project import Project
+from workspace import Workspace
 from logger import create_logger
 
 
@@ -12,7 +12,8 @@ SUITE_NAME = "с_Mobile_sandbox"
 client_info = {
     'project_name': "WOWSC",
     'project_path': "test_cases",
-    'mask_suite_name': None
+    'mask_suite_name': None,
+    'cache_path': 'cache'
 }
 logger = create_logger('main')
 
@@ -24,12 +25,14 @@ if __name__ == '__main__':
         password=parse_template_config("password")
     )
 
-    tms_project = TMSProject(
+    project = Project(
         client = client,
-        client_info=client_info
+        client_info=client_info,
+        cached=True
     )
     logger.info("Start")
-    tms_suite = TMSSuites(tms_project)
+    workspace = Workspace(project)
+    workspace.case_base_local_create(soft=False)
     logger.info("Finish")
 
 """

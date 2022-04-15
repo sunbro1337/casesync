@@ -41,7 +41,7 @@
 
 ### Tech
 
-- class Client
+- cache system improvements
 - refactor class TMSProject
 
 
@@ -53,7 +53,7 @@
 ### In progress
 
 - manipulations with cases
-- refactor create local case base
+- create dir for empty sections/suites
 
 
 ## Done:
@@ -75,3 +75,5 @@
 - class TMSProject
 - testcase system for test design
 - log system or lib
+- refactor create local case base
+- cache system minimal
