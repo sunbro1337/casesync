@@ -25,22 +25,18 @@ if __name__ == '__main__':
         password=parse_template_config("password")
     )
 
+    logger.info("Start")
     project = Project(
         client = client,
         client_info=client_info,
         cached=True
     )
-    logger.info("Start")
     workspace = Workspace(project)
-    workspace.case_base_local_create(soft=False)
+    workspace.case_base_local_clear()
+    workspace.case_base_local_create(soft=True)
+    workspace.add_section(
+        description='',
+        suite_id=project.find_suite_by_name(SUITE_NAME)['id'],
+        name='post_sandbox'
+    )
     logger.info("Finish")
-
-"""
-1 without case_base_local_clear
-2022-04-08 17:46:08,942 - main - INFO - Start
-2022-04-08 17:47:12,348 - main - INFO - Finish
-
-2 with case_base_local_clear
-2022-04-08 17:49:04,579 - main - INFO - Start
-2022-04-08 17:50:09,239 - main - INFO - Finish
-"""

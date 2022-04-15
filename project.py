@@ -7,7 +7,7 @@ from testrail.parameters import GetCasesParameter
 from file_manager import read_json
 
 
-logger = create_logger("TMSProject", logger_lvl=logging.INFO)
+logger = create_logger("Project", logger_lvl=logging.INFO)
 
 
 class Project:

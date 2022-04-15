@@ -8,21 +8,21 @@ from file_manager import create_yaml, read_yaml, check_path, check_name, remove_
 from testrail.cases_methods import GetMethod, PostMethod
 
 
-logger = create_logger('TMSSuite', logger_lvl=logging.INFO)
+logger = create_logger('Workspace', logger_lvl=logging.INFO)
 
 
 class Workspace:
     def __init__(self, project: Project):
-        logger.debug("Start init TMSSuites")
+        logger.debug("Start init Workspace")
         self.project = project
         assert self.project
-        logger.info(f"TMSSuite init")
+        logger.info(f"Workspace init")
 
     # SUITES
     pass
 
     # SECTIONS
-    def add_section(self, description, suite_id, parent_id, name):
+    def add_section(self, description, suite_id, name, parent_id=None):
         section_data = {
             'description': description,
             'suite_id': suite_id,
@@ -45,7 +45,7 @@ class Workspace:
             path = os.path.join(self.project.project_path, suite['name'].strip(), section['name'].strip() if section else '')
             logger.debug("Path is created")
             create_yaml(
-                name=f"{case['id']}_{case['title']}",
+                name=case['title'],
                 path=path,
                 data=case,
                 soft=soft
@@ -65,7 +65,7 @@ class Workspace:
                 #     soft=soft
                 # )
                 logger.debug("Start creating path")
-                case_name = f"{case['id']}_{case['title']}"
+                case_name = case['title']
                 section_name = get_dict_value_from_list(
                     self.project.sections[self.project.cases.index(suite)], 'id', case['section_id'], 'name'
                 )
