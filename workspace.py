@@ -3,7 +3,7 @@ import os
 from logger import create_logger
 
 from project import Project
-from testrail.requests import *
+from testrail.testrail_requests import *
 from file_manager import create_yaml, read_yaml, check_path, check_name, remove_path, get_dict_value_from_list
 from testrail.cases_methods import GetMethod, PostMethod
 

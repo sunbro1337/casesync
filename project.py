@@ -1,7 +1,7 @@
 import logging
 import os.path
 
-from testrail.requests import *
+from testrail.testrail_requests import *
 from logger import create_logger
 from testrail.parameters import GetCasesParameter
 from file_manager import read_json
@@ -11,14 +11,17 @@ logger = create_logger("Project", logger_lvl=logging.INFO)
 
 
 class Project:
-    def __init__(self, client: APIClient, client_info: dict, cached=False):
-        self.client = client
-        assert client
-
+    def __init__(self, client: APIClient or bool, client_info: dict, cached=False):
+        logger.debug("Start init Project")
         self.project_path = client_info['project_path']
 
-        self.project = self.find_project(client, client_info['project_name'].strip())
-        assert self.project
+        if client:
+            self.client = client
+            assert client
+            self.project = self.find_project(client, client_info['project_name'].strip())
+            assert self.project
+        else:
+            logger.warning('Project will be inited in offline mode')
 
         if not cached:
             self.suites = self.find_suites(self.client, self.project, client_info['mask_suite_name'])
@@ -31,6 +34,7 @@ class Project:
             self.suites = read_json(os.path.join(client_info['cache_path'], 'suites.json'))
             self.sections = read_json(os.path.join(client_info['cache_path'], 'sections.json'))
             self.cases = read_json(os.path.join(client_info['cache_path'], 'cases.json'))
+        logger.info("Project init")
 
     # PROJECTS
     @staticmethod
