@@ -26,11 +26,7 @@
 
 ### Git
 
-- research git hooks https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
-- implement git hooks
-- create test-design branch with dev branch
-- Git bot(client) for test rail
-- link git branch to task in jira
+- 
 
 
 ### Testrail
@@ -53,16 +49,22 @@
 - Create test cases extension for code redactor(vs studio code)
 
 
-### In progress
+## In progress
 
-- 
+### Git
+
+-  research git hooks https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+- implement git hooks
+- create test-design branch with dev branch
+- Git bot(client) for test rail
+- link git branch to task in jira
 
 
 ## Done:
 
 ### Git
 
--
+- 
 
 
 ### Testrail
@@ -73,6 +75,7 @@
 
 
 ### Tech
+
 - testcase file format(yml, json)
 - download all case base and save it in a test-case format
 - class TMSProject
