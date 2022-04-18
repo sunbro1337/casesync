@@ -55,7 +55,7 @@
 
 ### In progress
 
-- create dir for empty sections/suites
+- 
 
 
 ## Done:
@@ -80,3 +80,4 @@
 - log system or lib
 - refactor create local case base
 - cache system minimal
+- create dir for empty sections/suites
