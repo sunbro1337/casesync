@@ -112,7 +112,7 @@ def get_dict_value_from_list(list: list, key: str, value, returned_key: str) -> 
     else:
         return None
 
-def dump_yaml_data(path: str, data_types: list):
+def collect_yaml_data(path: str, data_types: list) -> dict:
     yaml_data = read_yaml(os.path.join(path))
     result_data = {}
     for key in yaml_data.keys():

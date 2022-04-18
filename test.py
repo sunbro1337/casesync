@@ -18,7 +18,7 @@ x = os.walk(
 #
 
 
-def dump_yaml_data(path: str, data_types: list):
+def collect_yaml_data(path: str, data_types: list):
     yaml_data = read_yaml(os.path.join(path))
     result_data = {}
     for key in yaml_data.keys():
@@ -27,7 +27,7 @@ def dump_yaml_data(path: str, data_types: list):
                 result_data[key] = yaml_data[key]
     return result_data
 
-print(dump_yaml_data(
+print(collect_yaml_data(
     path='test_cases/[Acceptance for Branch]/Acceptance/Проверка платформенной авторизации.yml',
     data_types=['suite_id', 'section_id', 'id']
 ))
