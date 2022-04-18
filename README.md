@@ -30,6 +30,7 @@
 - implement git hooks
 - create test-design branch with dev branch
 - Git bot(client) for test rail
+- link git branch to task in jira
 
 
 ### Testrail
@@ -43,7 +44,6 @@
 ### Tech
 
 - cache system improvements
-- refactor class TMSProject
 - post cases with hook(firstly collect dirs for sections/suites, secondly cases) relative to last cases commit
 
 
