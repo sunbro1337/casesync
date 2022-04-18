@@ -44,6 +44,8 @@
 
 - cache system improvements
 - refactor class TMSProject
+- post cases with hook(firstly collect dirs for sections/suites, secondly cases) relative to last cases commit
+
 
 
 ### Test design
@@ -53,8 +55,6 @@
 
 ### In progress
 
-- manipulations with cases:
-  - post cases(firstly collect dirs for sections/suites, secondly cases)
 - create dir for empty sections/suites
 
 
@@ -69,6 +69,7 @@
 
 - research testrail api
 - first testrail api implements
+- manipulations with cases
 
 
 ### Tech

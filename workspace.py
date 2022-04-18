@@ -66,6 +66,13 @@ class Workspace:
         logger.info(f"Cases for suite {suite['id'], suite['name']} has been created, section {section}")
 
     def case_base_local_create(self, soft=True):
+        base_name = self.project.project_path
+        for suite in self.project.suites:
+            check_path(os.path.join(base_name, suite['name']))
+        for suite in self.project.sections:
+            for section in suite:
+                suite_name = get_dict_value_from_list(self.project.suites, 'id', section['suite_id'], 'name')
+                check_path(os.path.join(base_name, suite_name, section['name']))
         for suite in self.project.cases:
             if not suite:
                 continue
@@ -83,7 +90,6 @@ class Workspace:
                     self.project.sections[self.project.cases.index(suite)], 'id', case['section_id'], 'name'
                 )
                 suite_name = get_dict_value_from_list(self.project.suites, 'id', case['suite_id'], 'name')
-                base_name = self.project.project_path
                 path = check_path(os.path.join(base_name, suite_name, section_name))
                 logger.debug("Path is created")
                 create_yaml(
