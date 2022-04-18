@@ -19,7 +19,16 @@ class Workspace:
         logger.info(f"Workspace init")
 
     # SUITES
-    pass
+    def add_suite(self, name, description):
+        suite_data = {
+            'name': name,
+            'description': description,
+        }
+        post_request(
+            client=self.project.client,
+            method=PostMethod().add_suite(self.project.project['id']),
+            data=suite_data
+        )
 
     # SECTIONS
     def add_section(self, description, suite_id, name, parent_id=None):
@@ -29,7 +38,11 @@ class Workspace:
             'parent_id': parent_id,
             'name': name
         }
-        post_request(self.project.client, PostMethod().add_section(self.project.project['id']), section_data)
+        post_request(
+            client=self.project.client,
+            method=PostMethod().add_section(self.project.project['id']),
+            data= section_data
+        )
 
     # CASES
     def create_cases_for_suite(self, suite: dict, section=None, soft=True):
