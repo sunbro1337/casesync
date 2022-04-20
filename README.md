@@ -26,7 +26,7 @@
 
 ### Git
 
-- 
+- buy gitlab for qa or develop hooks for bitbacket(more pain!)
 
 
 ### Testrail
@@ -35,6 +35,7 @@
 - write docs for testrail lib
 - sync comments for cases_methods with testrail api doc
 - Support the ID of the parent section (to build section hierarchies)
+- support adding attach files for cases
 
 
 ### Tech
@@ -53,11 +54,21 @@
 
 ### Git
 
--  research git hooks https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+- research git hooks:
+  - https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+  - https://developer.atlassian.com/server/framework/atlassian-sdk/set-up-the-atlassian-plugin-sdk-and-build-a-project/
+  - https://docs.gitlab.com/ee/administration/server_hooks.html
+- migrate to gitlab
 - implement git hooks
 - create test-design branch with dev branch
 - Git bot(client) for test rail
 - link git branch to task in jira
+- last branch label in case
+
+
+### Testrail
+
+- login with api key
 
 
 ## Done:
