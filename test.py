@@ -27,7 +27,7 @@ def collect_yaml_data(path: str, data_types: list):
                 result_data[key] = yaml_data[key]
     return result_data
 
-print(collect_yaml_data(
-    path='test_cases/[Acceptance for Branch]/Acceptance/Проверка платформенной авторизации.yml',
-    data_types=['suite_id', 'section_id', 'id']
-))
+#print(collect_yaml_data(
+#    path='test_cases/[Acceptance for Branch]/Acceptance/Проверка платформенной авторизации.yml',
+#    data_types=['suite_id', 'section_id', 'id']
+#))
