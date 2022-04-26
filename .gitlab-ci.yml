@@ -1,0 +1,7 @@
+job1:
+  stage: 'test'
+  script:
+    - py test.py
+  tags:
+    - python
+    - testrail

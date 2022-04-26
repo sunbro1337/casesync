@@ -29,6 +29,7 @@
 - buy gitlab for qa or develop hooks for bitbacket(more pain!)
 - configure gitlab for users groups
 - trigger jenkins with bitbucket webhook > jenkins get diff from bitbacket after triggered
+- improves for GitPython functions
 
 
 ### Testrail
@@ -62,8 +63,18 @@
 - Git bot(client) for test rail
 - link git branch to task in jira
 - last branch label in case
-- configure Gitlab runners
-- write scripts for runners
+- configure Gitlab runners:
+  - https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading
+  - https://docs.gitlab.com/ee/ci/runners/configure_runners.html
+- write scripts for runners:
+  - https://gitpython.readthedocs.io/en/stable/tutorial.html#
+  - https://python-gitlab.readthedocs.io/en/stable/index.html
+  - https://forum.gitlab.com/t/ci-cd-pipeline-get-list-of-changed-files/26847/23
+  - https://docs.gitlab.com/ee/ci/variables/
+  - https://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git
+  - https://git-scm.com/docs/git-ls-remote.html
+  - https://stackoverflow.com/questions/10991639/using-gitpython-module-to-get-remote-head-branch
+  - https://en.wikipedia.org/wiki/Shebang_(Unix)
 
 
 ### Testrail
