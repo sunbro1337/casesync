@@ -90,6 +90,8 @@
   - https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
   - https://developer.atlassian.com/server/framework/atlassian-sdk/set-up-the-atlassian-plugin-sdk-and-build-a-project/
   - https://docs.gitlab.com/ee/administration/server_hooks.html
+- research GitPython lib:
+  - https://gitpython.readthedocs.io/en/stable/tutorial.html#obtaining-diff-information
 - research gitlab runners:
   - https://docs.gitlab.com/runner/
   - https://docs.gitlab.com/runner/install/windows.html
