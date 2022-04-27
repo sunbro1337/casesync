@@ -1,4 +1,4 @@
-# WelcomeToMars
+# Casesync, gitgud
 
 ## Workflow for this repo
 - create branch with commit
@@ -23,6 +23,13 @@
 
 
 ## Improves:
+
+### Docs
+
+- git guide
+- how to write ci scripts
+- how to write cases
+- casesync guide
 
 ### Git
 

@@ -52,8 +52,9 @@ logger.info('Workspace is created')
 
 logger.info("Start pushing changes on testrail")
 for i in diff_data:
-    if os.path.isfile(diff_data[i]) and '.yaml' in diff_data[i]:
-        logger.info(f"Pushing changes from {diff_data[i]}...")
-        continue
-        # logger.info("Success")
+    case_path = diff_data[i]
+    if os.path.isfile(case_path) and '.yaml' in case_path:
+        logger.info(f"Pushing changes from {case_path}...")
+        workspace.add_case(case_path)
+        logger.info("Success")
 logger.info("Pushing changes is completed")
