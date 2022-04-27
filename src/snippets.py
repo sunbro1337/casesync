@@ -13,7 +13,7 @@ client_info = {
     'project_name': "WOWSC",
     'project_path': "test_cases",
     'mask_suite_name': None,
-    'cache_path': 'cache'
+    'cache_path': os.path.join('..', '.cache')
 }
 logger = create_logger('main')
 

@@ -1,10 +1,10 @@
 import logging
 import os.path
 
-from testrail.testrail_requests import *
-from logger import create_logger
-from testrail.parameters import GetCasesParameter
-from file_manager import read_json
+from .testrail.testrail_requests import *
+from .logger import create_logger
+from .testrail.parameters import GetCasesParameter
+from .file_manager import read_json
 
 
 logger = create_logger("Project", logger_lvl=logging.INFO)

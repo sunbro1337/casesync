@@ -1,7 +1,9 @@
-job1:
-  stage: 'test'
+push_testcases:
+  stage: 'build'
+  before_script:
+    - powershell py -0
   script:
-    - py test.py
+    - powershell py -3.10 .cashe/push_testcases.py
   tags:
     - python
     - testrail

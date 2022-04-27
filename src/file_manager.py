@@ -1,16 +1,14 @@
-import hashlib
 import logging
 import os.path
 import re
 import shutil
 import sys
-import zlib
 from xml.etree import ElementTree
 import json
 import yaml
 
 from configs.settings import *
-from logger import create_logger
+from .logger import create_logger
 
 
 logger = create_logger('file_manager', logger_lvl=logging.WARNING)
@@ -18,7 +16,7 @@ logger = create_logger('file_manager', logger_lvl=logging.WARNING)
 
 def parse_template_config(tag):
     result = None
-    template_config = os.path.join('configs', "template_config.xml")
+    template_config = os.path.join('../configs', "template_config.xml")
     for event, elem in ElementTree.iterparse(template_config):
         if elem.tag == tag:
             result = elem.text
