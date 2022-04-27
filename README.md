@@ -45,6 +45,7 @@
 
 - cache system improvements
 - post cases with hook(firstly collect dirs for sections/suites, secondly cases) relative to last cases commit
+- implement install.py script for casesync system
 
 
 
