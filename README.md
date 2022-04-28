@@ -37,6 +37,7 @@
 - configure gitlab for users groups
 - trigger jenkins with bitbucket webhook > jenkins get diff from bitbacket after triggered
 - improves for GitPython functions
+- Use permissions and roles for users groups: https://docs.gitlab.com/ee/user/profile/
 
 
 ### Testrail
@@ -83,6 +84,7 @@
   - https://git-scm.com/docs/git-ls-remote.html
   - https://stackoverflow.com/questions/10991639/using-gitpython-module-to-get-remote-head-branch
   - https://en.wikipedia.org/wiki/Shebang_(Unix)
+  - https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project
 
 
 ### Testrail

@@ -20,6 +20,7 @@ logger = create_logger(
 CLIENT_CONFIG_PATH = os.path.join('..', 'configs', 'client_config.yaml')
 diff_data_path = os.path.join('..', diff_file_name)
 CLIENT_CONFIG_DICT = read_yaml(CLIENT_CONFIG_PATH)
+print(CLIENT_CONFIG_DICT)
 logger.debug(f"CLIENT_CONFIG_PATH: {CLIENT_CONFIG_PATH}")
 logger.debug(f"diff_data_path: {diff_data_path}")
 logger.debug(f"CLIENT_CONFIG_DICT: {CLIENT_CONFIG_DICT}")
@@ -32,7 +33,7 @@ logger.debug(f"Diff data: {diff_data}")
 logger.info("Start auth gitlab client on testrail")
 client = auth_client(
     url=CLIENT_CONFIG_DICT['testrail']['url'],
-    user=CLIENT_CONFIG_DICT['testrail']['username'],
+    user=CLIENT_CONFIG_DICT['testrail']['username'] + "@wargaming.net",
     password=CLIENT_CONFIG_DICT['testrail']['apikey'],
 )
 assert client
@@ -55,6 +56,6 @@ for i in diff_data:
     case_path = diff_data[i]
     if os.path.isfile(case_path) and '.yaml' in case_path:
         logger.info(f"Pushing changes from {case_path}...")
-        workspace.add_case(case_path)
+        # workspace.add_case(case_path)
         logger.info("Success")
 logger.info("Pushing changes is completed")
