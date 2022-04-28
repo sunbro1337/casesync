@@ -3,7 +3,7 @@ push_testcases:
   before_script:
     - powershell py -0
   script:
-    - powershell py -3.10 .cashe/push_testcases.py
+    - powershell py -3.10 .cashe/push_testcases.py --usr="$TESTRAIL_USERNAME" --apikey="$TESTRAIL_APIKEY" --url="$TESTRAIL_URL"
   tags:
     - python
     - testrail
