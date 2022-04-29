@@ -16,9 +16,13 @@ from hooks_support.file_manager import create_json, read_json
 diff_file_name = 'diff_data'
 diff_file_path = '.'
 repo_path = '.git'
+mask = 'test_cases'
 
-diff_data = git_func.get_diff(local_git_path=repo_path)
-diff_data_path = create_json(name=diff_file_name, path=diff_file_path, data=diff_data, soft=False)
-print(read_json(diff_data_path))
-os.system(f'git add {diff_data_path}')
-os.system(f'git commit -m "update diff_data.json"')
+diff_data = git_func.get_diff(local_git_path=repo_path, mask=mask, ref_name='origin/name')
+if diff_data:
+    diff_data_path = create_json(name=diff_file_name, path=diff_file_path, data=diff_data, soft=False)
+    print(read_json(diff_data_path))
+    os.system(f'git add {diff_data_path}')
+    os.system(f'git commit -m "update diff_data.json"')
+else:
+    print(f"Path {mask} will not changed")

@@ -1,9 +1,12 @@
 push_testcases:
   stage: 'build'
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_BUILD_REF_NAME == "main"'
   before_script:
+    - powershell pwd
     - powershell py -0
   script:
-    - powershell py -3.10 .cashe/push_testcases.py --usr="$TESTRAIL_USERNAME" --apikey="$TESTRAIL_APIKEY" --url="$TESTRAIL_URL"
+    - powershell py -3.10 ci_scripts/push_testcases.py --usr="$TESTRAIL_USERNAME" --apikey="$TESTRAIL_APIKEY" --url="$TESTRAIL_URL"
   tags:
     - python
     - testrail

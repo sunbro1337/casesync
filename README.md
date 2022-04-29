@@ -58,7 +58,8 @@
 
 - cache system improvements
 - post cases with hook(firstly collect dirs for sections/suites, secondly cases) relative to last cases commit
-- implement install.py script for casesync system
+- implement install.py script for casesync system:
+  - check and update local hooks
 
 
 
@@ -92,6 +93,8 @@
 - configure Gitlab runners:
   - https://docs.gitlab.com/runner/shells/index.html#shell-profile-loading
   - https://docs.gitlab.com/ee/ci/runners/configure_runners.html
+  - https://docs.gitlab.com/ee/ci/pipelines/merge_request_pipelines.html
+  - https://stackoverflow.com/questions/70654510/how-to-run-pipeline-after-merge-request-approved-in-gitlab-ci
 - write scripts for runners:
   - https://gitpython.readthedocs.io/en/stable/tutorial.html#
   - https://python-gitlab.readthedocs.io/en/stable/index.html
@@ -102,6 +105,7 @@
   - https://stackoverflow.com/questions/10991639/using-gitpython-module-to-get-remote-head-branch
   - https://en.wikipedia.org/wiki/Shebang_(Unix)
   - https://docs.gitlab.com/ee/ci/variables/#add-a-cicd-variable-to-a-project
+  - https://www.codetd.com/en/article/12143066
 
 
 ### Testrail
