@@ -1,0 +1,10 @@
+testrail:
+  url: ''
+  username: ''
+  apikey: ''
+client_info:
+  project_name: ''
+  project_path: ''
+  mask_suite_name: ''
+  cache_path: ''
+  current_suite: ''

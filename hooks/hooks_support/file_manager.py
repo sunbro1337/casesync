@@ -9,8 +9,8 @@ from xml.etree import ElementTree
 import json
 import yaml
 
-from configs.settings import *
-from logger import create_logger
+from .settings import *
+from .logger import create_logger
 
 
 logger = create_logger('file_manager', logger_lvl=logging.WARNING)

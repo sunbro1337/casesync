@@ -1,6 +1,6 @@
-from testrail.testrail import *
+from .testrail import *
 from pprint import pprint
-from testrail.cases_methods import GetMethod, PostMethod
+from .cases_methods import GetMethod, PostMethod
 
 
 def auth_client(url, user, password) -> APIClient:
