@@ -2,7 +2,7 @@
 configs/client_config.yaml
 src/testrail/__pycache__
 test_cases/*
-.cache/*
+cache/*
 hooks/hooks_support/__pycache__
 __pycache__
 */__pycache__
