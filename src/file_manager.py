@@ -11,7 +11,7 @@ from configs.settings import *
 from logger import create_logger
 
 
-logger = create_logger('file_manager', logger_lvl=logging.DEBUG)
+logger = create_logger('file_manager', logger_lvl=logging.INFO)
 
 
 def parse_template_config(tag):

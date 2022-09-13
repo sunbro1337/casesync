@@ -59,6 +59,7 @@ class Project:
         if mask_name:
             masked_suites = []
             for suite in suites:
+                logger.debug(f'Check suite name: {suite["name"]}')
                 if mask_name in suite['name']:
                     masked_suites.append(suite)
             suites = masked_suites
