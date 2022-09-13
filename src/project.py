@@ -1,10 +1,10 @@
 import logging
 import os.path
 
-from .testrail.testrail_requests import *
-from .logger import create_logger
-from .testrail.parameters import GetCasesParameter
-from .file_manager import read_json
+from testrail.testrail_requests import *
+from logger import create_logger
+from testrail.parameters import GetCasesParameter
+from file_manager import read_json, create_json, check_path
 
 
 logger = create_logger("Project", logger_lvl=logging.INFO)
@@ -24,12 +24,16 @@ class Project:
             logger.warning('Project will be inited in offline mode')
 
         if not cached:
+            check_path(client_info['cache_path'])
             self.suites = self.find_suites(self.client, self.project, client_info['mask_suite_name'])
             assert self.suites
+            create_json('suites', client_info['cache_path'], self.suites, soft=False)
 
             self.sections = [self.find_sections(suite) for suite in self.suites]
+            create_json('sections', client_info['cache_path'], self.sections, soft=False)
             self.cases = [self.find_cases(self.client, self.project, suite) \
                           for suite in self.suites]
+            create_json('cases', client_info['cache_path'], self.cases, soft=False)
         else:
             self.suites = read_json(os.path.join(client_info['cache_path'], 'suites.json'))
             self.sections = read_json(os.path.join(client_info['cache_path'], 'sections.json'))

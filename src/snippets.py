@@ -6,37 +6,28 @@ from testrail.testrail_requests import *
 from project import Project
 from workspace import Workspace
 from logger import create_logger
+from file_manager import read_yaml
 
 
-SUITE_NAME = "[Mobile: Render]"
-client_info = {
-    'project_name': "WOWSC",
-    'project_path': "test_cases",
-    'mask_suite_name': None,
-    'cache_path': os.path.join('..', '.cache')
-}
+CLIENT_CONFIG_PATH = os.path.join('..', 'configs', 'client_config.yaml')
+CLIENT_CONFIG_DICT = read_yaml(CLIENT_CONFIG_PATH)
 logger = create_logger('main')
 
 
 if __name__ == '__main__':
     client = auth_client(
-        url=parse_template_config("url"),
-        user=parse_template_config("user"),
-        password=parse_template_config("password")
+        url=CLIENT_CONFIG_DICT['testrail']['url'],
+        user=CLIENT_CONFIG_DICT['testrail']['username'],
+        password=CLIENT_CONFIG_DICT['testrail']['apikey'],
     )
 
     logger.info("Start")
     project = Project(
         client = client,
-        client_info=client_info,
-        cached=True
+        client_info=CLIENT_CONFIG_DICT['client_info'],
+        cached=False
     )
     workspace = Workspace(project)
-    # workspace.case_base_local_clear()
-    # workspace.case_base_local_create(soft=True)
-    workspace.add_section(
-        description='',
-        suite_id=project.find_suite_by_name(SUITE_NAME)['id'],
-        name='3D-UI'
-    )
+    workspace.case_base_local_clear()
+    workspace.case_base_local_create(soft=False)
     logger.info("Finish")
