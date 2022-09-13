@@ -51,7 +51,7 @@ logger.info("Start auth gitlab client on testrail")
 # )
 client = auth_client(
     url=args.url,
-    user=args.usr + "@wargaming.net",
+    user=args.usr,
     password=args.apikey,
 )
 assert client
